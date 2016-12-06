@@ -1,0 +1,1 @@
+java -XX:+CreateMinidumpOnCrash -Djava.ext.dirs=.; com.aiyc.server.standalone.WasStandaloneServer

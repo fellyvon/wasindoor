@@ -1,0 +1,1 @@
+nohup java -jar -Xms512m -Xmx512m -XX:+CreateMinidumpOnCrash -XX:NewSize=256m -XX:MaxNewSize=300m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC wasserver-v0.0.1.jar  >nohup.out 2>&1 &
