@@ -20,6 +20,7 @@ import com.aiyc.server.standalone.svm.TrainSVMTimerTask;
 import com.aiyc.server.standalone.util.Configuration;
 import com.aiyc.server.standalone.util.ConsoleData;
 import com.aiyc.server.standalone.util.Log;
+import com.waspring.wasdbtools.DatabaseConnection;
 
 /**
  * Basic class of the standalone server
@@ -68,6 +69,11 @@ public class WasStandaloneServer implements Runnable {
 	 *            configuration
 	 */
 	public static void initConfig(String[] args) {
+		//初始化数据库配置文件
+		System.out.println(new File("database.xml").getAbsolutePath());
+		DatabaseConnection.setConnConfig("database.xml");
+		
+		
 		Object list = ConsoleData.instance().getCachedValue(ConsoleData.HNADER);
 		if (args.length > 0) {
 			Configuration.ServerPort = new Integer(args[0]);
@@ -136,6 +142,7 @@ public class WasStandaloneServer implements Runnable {
 	 */
 	public static void startServer() {
 		try {
+			
 			WasStandaloneServer server = new WasStandaloneServer(
 					Configuration.ServerPort);
 			new Thread(server).start();
