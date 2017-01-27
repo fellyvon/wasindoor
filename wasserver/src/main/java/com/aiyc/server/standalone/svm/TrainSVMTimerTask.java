@@ -7,8 +7,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
-import com.aiyc.server.standalone.db.DaoUtil;
 import com.aiyc.server.standalone.util.Configuration;
+import com.waspring.wasdbtools.DaoUtil;
 
 public final class TrainSVMTimerTask extends TimerTask {
 

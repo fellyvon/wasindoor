@@ -15,11 +15,10 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 import com.aiyc.framework.utils.StringUtils;
-import com.aiyc.server.standalone.db.DaoUtil;
 import com.aiyc.server.standalone.util.Configuration;
 import com.aiyc.server.standalone.util.Log;
+import com.waspring.wasdbtools.DaoUtil;
 
 /**
  * Handler for HTTP requests used to up- and download image.
@@ -235,13 +234,13 @@ public class ImageHandler {
 		if (rs.next()) {// //����
 			sql = "insert into   arc_k_user_ext (user_no,user_img,up_date,arc_date)"
 					+ " select    user_no,user_img,up_date ,now() from  k_user_ext where user_no=? ";
-			DaoUtil.executeQuery(sql, new Object[] { userNo });
+			DaoUtil.executeUpdate(sql, new Object[] { userNo });
 
 			sql = " update k_user_ext set USER_IMG=?,UP_DATE=now() where user_no=?  ";
-			DaoUtil.executeQuery(sql, new Object[] { head, userNo });
+			DaoUtil.executeUpdate(sql, new Object[] { head, userNo });
 		} else {// /��¼
 			sql = "insert into k_user_ext(user_no,user_img,up_date) values(?,?,now())";
-			DaoUtil.executeQuery(sql, new Object[] { userNo, head });
+			DaoUtil.executeUpdate(sql, new Object[] { userNo, head });
 		}
 	}
 

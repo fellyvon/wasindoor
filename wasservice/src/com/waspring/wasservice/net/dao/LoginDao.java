@@ -2,7 +2,7 @@ package com.waspring.wasservice.net.dao;
 
 import java.sql.ResultSet;
 
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 
 public class LoginDao {
 

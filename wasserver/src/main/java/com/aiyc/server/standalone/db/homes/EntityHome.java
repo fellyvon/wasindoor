@@ -13,12 +13,12 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.aiyc.server.standalone.db.DatabaseConnection;
 import com.aiyc.server.standalone.db.IEntity;
 import com.aiyc.server.standalone.util.Configuration;
+import com.aiyc.server.standalone.util.Configuration.DatabaseTypes;
 import com.aiyc.server.standalone.util.ConsoleData;
 import com.aiyc.server.standalone.util.Log;
-import com.aiyc.server.standalone.util.Configuration.DatabaseTypes;
+import com.waspring.wasdbtools.DatabaseConnection;
  
 
 public abstract class EntityHome<T extends IEntity<Integer>> implements

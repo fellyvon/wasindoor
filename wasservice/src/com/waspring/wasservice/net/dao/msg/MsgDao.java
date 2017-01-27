@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aiyc.framework.utils.UID;
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasservice.net.model.msg.GetGroupMsgReqMessage;
 import com.waspring.wasservice.net.model.msg.SendGroupMsgReqMessage;
 import com.waspring.wasservice.net.model.msg.SengSingleMsgReqMessage;
@@ -35,10 +35,10 @@ public class MsgDao {
 				+ " WHERE rcv_no = ?\n" + "\t\t\t AND rcv_id IN (SELECT id\n"
 				+ "\t\t\t\t\t\t\t\t\t\t\t\tFROM t_group_rcv_msg\n"
 				+ "\t\t\t\t\t\t\t\t\t\t\t WHERE group_id = ?)";
-		DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.RCVER_NO,
+		DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.RCVER_NO,
 				model.MESSAGE.GROUP_ID });
 
-		// //²é¿´½ÓÊÕÏûÏ¢µÄÊýÁ¿ÊÇ·ñÍê³É
+		// //ï¿½é¿´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 		sql = "select count(1) num from   t_group_rcv_status,t_group_rcv_msg where "
 				+ "  t_group_rcv_status.rcv_id= t_group_rcv_msg.id and   "
 				+ "t_group_rcv_status.is_rcv='01' and t_group_rcv_msg.group_id=? "
@@ -61,23 +61,23 @@ public class MsgDao {
 							"  t_group_rcv_status WHERE rcv_id IN (SELECT id\n"
 					+ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tFROM t_group_rcv_msg\n"
 					+ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t WHERE group_id = ?)";
-			DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.GROUP_ID });
+			DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.GROUP_ID });
 
 			sql = "delete from  t_group_rcv_status where   rcv_id IN (SELECT id\n"
 					+ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tFROM t_group_rcv_msg\n"
 					+ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t WHERE group_id = ?)";
 
-			DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.GROUP_ID });
+			DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.GROUP_ID });
 			sql = "INSERT INTO arc_t_group_rcv_msg\n"
 					+ "\t\t(id, group_id, sender_no, msg_sort_code, content_msg, send_time)\n"
 					+ "\t\tSELECT id, group_id, sender_no, msg_sort_code, content_msg, send_time\n"
 					+ "\t\t\tFROM t_group_rcv_msg\n"
 					+ "\t\t WHERE group_id = ?";
 
-			DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.GROUP_ID });
+			DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.GROUP_ID });
 
 			sql = "delete from  t_group_rcv_msg where group_id = ?  ";
-			DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.GROUP_ID });
+			DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.GROUP_ID });
 
 		}
 
@@ -89,11 +89,11 @@ public class MsgDao {
 				+ "\t\tSELECT id, sender_no, rcver_no, msg_sort_code, content_msg, send_time, now()\n"
 				+ "\t\t\tFROM t_rcv_msg g\n" + "\t\t WHERE g. sender_no = ?\n"
 				+ "\t\t\t\t\t AND g.rcver_no = ?";
-		DaoUtil.executeQuery(sql, new Object[] { send, rcver });
+		DaoUtil.executeUpdate(sql, new Object[] { send, rcver });
 
 		sql = " delete     from t_rcv_msg   where   sender_no = ?\n"
 				+ "\t\t\t\t\t AND  rcver_no = ?";
-		DaoUtil.executeQuery(sql, new Object[] {send,rcver});
+		DaoUtil.executeUpdate(sql, new Object[] {send,rcver});
 	}
 
 	public ResultSet getMsg(String send, String rcver) throws Exception {
@@ -129,7 +129,7 @@ public class MsgDao {
 		list.add(model.MESSAGE.RCVER_NO);
 		list.add(model.MESSAGE.MSG_SORT_CODE);
 		list.add(model.MESSAGE.CONTENT_MSG);
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 	}
 
 	public String saveGroupMsg(SendGroupMsgReqMessage model) throws Exception {
@@ -145,13 +145,13 @@ public class MsgDao {
 
 		list.add(model.MESSAGE.MSG_SORT_CODE);
 		list.add(model.MESSAGE.CONTENT_MSG);
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 
 		return id;
 	}
 
 	/**
-	 * Ð´ÈëÈº×é½ÓÊÕ×´Ì¬
+	 * Ð´ï¿½ï¿½Èºï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 	 */
 
 	public void saveGroupMsgStatus(String id, SendGroupMsgReqMessage model)
@@ -168,7 +168,7 @@ public class MsgDao {
 		list.add(id);
 		list.add(model.MESSAGE.GROUP_ID);
 		list.add(model.MESSAGE.SENDER_NO);
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 
 	}
 

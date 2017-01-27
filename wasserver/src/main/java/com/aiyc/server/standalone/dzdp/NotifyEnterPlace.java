@@ -8,9 +8,8 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
- 
-import com.aiyc.server.standalone.db.DaoUtil;
 import com.aiyc.server.standalone.util.Configuration;
+import com.waspring.wasdbtools.DaoUtil;
 
 /**
  * 同步任务入口

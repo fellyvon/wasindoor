@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasservice.net.model.GetCodeRepMessage;
 import com.waspring.wasservice.net.model.GetCodeReqMessage;
 

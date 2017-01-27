@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aiyc.framework.utils.StringUtils;
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasservice.net.model.area.SetAreaReqMessage;
 import com.waspring.wasservice.net.model.area.SetBuildReqMessage;
 import com.waspring.wasservice.net.model.area.SetDoorReqMessage;
@@ -14,7 +14,7 @@ import com.waspring.wasservice.net.model.area.SetGraphReqMessage;
 
 public class GraphDao {
 	/**
-	 * Í¨¹ýµØÍ¼²éÑ¯Õû¸öÇøÓò
+	 * Í¨ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 
 	public ResultSet queryArea(String mapNo) throws Exception {
@@ -25,7 +25,7 @@ public class GraphDao {
 	}
 
 	/**
-	 * ±£´æÍ¼ÐÎ
+	 * ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 	 */
 
 	public void saveGraph(SetGraphReqMessage model) throws Exception {
@@ -34,7 +34,7 @@ public class GraphDao {
 				+ "" + "values(" + DaoUtil.makePix(12) + ")";
 		String[] bounds = model.MESSAGE.MAP_BOUNDS.split(",");
 		String[] ceters = model.MESSAGE.MAP_CENTER.split(",");
-		DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.MAP_NO,
+		DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.MAP_NO,
 				model.MESSAGE.MAP_NAME, model.MESSAGE.MAP_URL, bounds[0],
 				bounds[1], bounds[2], bounds[3], ceters[0], ceters[1],
 				model.MESSAGE.MAP_LEVEL, model.MESSAGE.MIN_LEVEL,
@@ -42,7 +42,7 @@ public class GraphDao {
 	}
 
 	/**
-	 * ²éÑ¯seller
+	 * ï¿½ï¿½Ñ¯seller
 	 */
 
 	public boolean isSeller(String areaNo, String buildNo, String floorNo,
@@ -73,7 +73,7 @@ public class GraphDao {
 	}
 
 	/**
-	 * ²éÑ¯µØÍ¼ÊÇ·ñ»¹ÔÚÊ¹ÓÃ
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½Í¼ï¿½Ç·ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
 	 */
 
 	public boolean ismapUse(String mapNo) throws Exception {
@@ -83,40 +83,40 @@ public class GraphDao {
 	}
 
 	/**
-	 * É¾³ýÍ¼ÐÎ
+	 * É¾ï¿½ï¿½Í¼ï¿½ï¿½
 	 */
 
 	public void delGraph(String mapNo) throws Exception {
 		String sql = "delete from  map where  mapid=?   ";
-		DaoUtil.executeQuery(sql, new Object[] { mapNo });
+		DaoUtil.executeUpdate(sql, new Object[] { mapNo });
 	}
 
 	/**
-	 * É¾³ýÇøÓò
+	 * É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 
 	public void delArea(String areaNo, boolean sub) throws Exception {
 		String sql = "delete from  d_area where  AREA_NO=?   ";
 
-		DaoUtil.executeQuery(sql, new Object[] { areaNo });
+		DaoUtil.executeUpdate(sql, new Object[] { areaNo });
 
 		if (sub) {
 			sql = "delete from  d_building  where  AREA_NO=? ";
 
-			DaoUtil.executeQuery(sql, new Object[] { areaNo });
+			DaoUtil.executeUpdate(sql, new Object[] { areaNo });
 
 			sql = "delete from  d_floor  where  AREA_NO=? ";
 
-			DaoUtil.executeQuery(sql, new Object[] { areaNo });
+			DaoUtil.executeUpdate(sql, new Object[] { areaNo });
 
 			sql = "delete from  d_door  where  AREA_NO=? ";
 
-			DaoUtil.executeQuery(sql, new Object[] { areaNo });
+			DaoUtil.executeUpdate(sql, new Object[] { areaNo });
 		}
 	}
 
 	/**
-	 * É¾³ýÂ¥Óî
+	 * É¾ï¿½ï¿½Â¥ï¿½ï¿½
 	 */
 
 	public void delBuild(String areaNo, String buildNo, boolean sub)
@@ -124,21 +124,21 @@ public class GraphDao {
 
 		String sql = "delete from  d_building  where AREA_NO=?  and   BUILDING_NO=? ";
 
-		DaoUtil.executeQuery(sql, new Object[] { areaNo, buildNo });
+		DaoUtil.executeUpdate(sql, new Object[] { areaNo, buildNo });
 
 		if (sub) {
 			sql = "delete from  d_floor  where  AREA_NO=?  and  BUILDING_NO=? ";
 
-			DaoUtil.executeQuery(sql, new Object[] { areaNo, buildNo });
+			DaoUtil.executeUpdate(sql, new Object[] { areaNo, buildNo });
 
 			sql = "delete from  d_door  where  AREA_NO=?  and  BUILDING_NO=? ";
 
-			DaoUtil.executeQuery(sql, new Object[] { areaNo, buildNo });
+			DaoUtil.executeUpdate(sql, new Object[] { areaNo, buildNo });
 		}
 	}
 
 	/**
-	 * É¾³ýÂ¥²ã
+	 * É¾ï¿½ï¿½Â¥ï¿½ï¿½
 	 */
 
 	public void delFloor(String areaNo, String buildNo, String floorNo,
@@ -146,18 +146,18 @@ public class GraphDao {
 
 		String sql = "delete from  d_floor  where  AREA_NO=?  and   BUILDING_NO=? and  FLOOR_NO=? ";
 
-		DaoUtil.executeQuery(sql, new Object[] { areaNo, buildNo, floorNo });
+		DaoUtil.executeUpdate(sql, new Object[] { areaNo, buildNo, floorNo });
 		if (sub) {
 			sql = "delete from  d_door  where  AREA_NO=?  and   BUILDING_NO=? and FLOOR_NO=? ";
 
 			DaoUtil
-					.executeQuery(sql,
+					.executeUpdate(sql,
 							new Object[] { areaNo, buildNo, floorNo });
 		}
 	}
 
 	/**
-	 * É¾³ý·¿¼ä
+	 * É¾ï¿½ï¿½ï¿½
 	 */
 
 	public void delDoor(String areaNo, String buildNo, String floorNo,
@@ -165,25 +165,25 @@ public class GraphDao {
 
 		String sql = "delete from  d_door  where  AREA_NO=?  and   BUILDING_NO=? and  FLOOR_NO=? and   doorNo=? ";
 
-		DaoUtil.executeQuery(sql, new Object[] { areaNo, buildNo, floorNo,
+		DaoUtil.executeUpdate(sql, new Object[] { areaNo, buildNo, floorNo,
 				doorNo });
 
 		sql = "delete from   d_bussipos where shopno=? and   BUILDING_NO=? and AREA_NO=? "
 				+ "   and floor_no=?   ";
 
-		DaoUtil.executeQuery(sql, new Object[] { doorNo, buildNo, areaNo,
+		DaoUtil.executeUpdate(sql, new Object[] { doorNo, buildNo, areaNo,
 				floorNo });
 	}
 
 	/**
-	 * ±£´æÇøÓòÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	public void saveAreaInfo(SetAreaReqMessage model) throws Exception {
 		String sql = " insert into d_area(   `AREA_NO` , `AREA_NAME` ,"
 				+ "`AREA_ADDR` , `BUILD_NUM` , `AREA_TYPE` ,"
 				+ "`P_AREA_NO` , `IMG_URL`) values(" + DaoUtil.makePix(7) + ")";
 
-		DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.AREA_NO,
+		DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.AREA_NO,
 				model.MESSAGE.AREA_NAME, model.MESSAGE.AREA_ADDR,
 				model.MESSAGE.BUILD_NUM, model.MESSAGE.AREA_TYPE,
 				model.MESSAGE.P_AREA_NO, model.MESSAGE.IMG_URL,
@@ -192,7 +192,7 @@ public class GraphDao {
 	}
 
 	/**
-	 * ±£´æÂ¥Óî
+	 * ï¿½ï¿½ï¿½ï¿½Â¥ï¿½ï¿½
 	 */
 
 	public void saveBuildInfo(SetBuildReqMessage model) throws Exception {
@@ -201,7 +201,7 @@ public class GraphDao {
 				+ "`FLOORS` ," + "`FLOOR_PIX` ," + "`JD` ," + " `WD` ,"
 				+ "`IMG_URL`) values(" + DaoUtil.makePix(9) + ")";
 
-		DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.BUILD_NO,
+		DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.BUILD_NO,
 				model.MESSAGE.AREA_NO, model.MESSAGE.BUILDING_NAME,
 				model.MESSAGE.BUILDING_DESC, model.MESSAGE.FLOORS,
 				model.MESSAGE.FLOOR_PIX, model.MESSAGE.JD, model.MESSAGE.WD,
@@ -211,7 +211,7 @@ public class GraphDao {
 	}
 
 	/**
-	 * ±£´æÂ¥²ã
+	 * ï¿½ï¿½ï¿½ï¿½Â¥ï¿½ï¿½
 	 */
 
 	public void saveFloorInfo(SetFloorReqMessage model) throws Exception {
@@ -219,21 +219,21 @@ public class GraphDao {
 				+ "`AREA_NO`, " + "`IMG_URL`, " + "`DOORS` , "
 				+ "`MAP_NO` ) values(" + DaoUtil.makePix(6) + ")";
 
-		DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.FLOOR_NO,
+		DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.FLOOR_NO,
 
 		model.MESSAGE.BUILD_NO, model.MESSAGE.AREA_NO, model.MESSAGE.IMG_URL,
 				model.MESSAGE.DOORS, model.MESSAGE.MAP_NO });
 	}
 
 	/**
-	 * ±£´æ·¿¼ä
+	 * ï¿½ï¿½ï¿½æ·¿ï¿½ï¿½
 	 */
 	public void saveDoorInfo(SetDoorReqMessage model) throws Exception {
 		String sql = " insert into `d_door`(  `DOOR_NO` , " + "`FLOOR_NO` , "
 				+ "`BUILD_NO` , " + "`AREA_NO`  ) values(" + DaoUtil.makePix(4)
 				+ ")";
 
-		DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.DOOR_NO,
+		DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.DOOR_NO,
 
 		model.MESSAGE.FLOOR_NO, model.MESSAGE.BUILD_NO, model.MESSAGE.AREA_NO,
 
@@ -266,7 +266,7 @@ public class GraphDao {
 		list.add(model.MESSAGE.AREA_NO);
 		list.add(model.MESSAGE.BUSINESSID);
 
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 	}
 
 	/**
@@ -296,7 +296,7 @@ public class GraphDao {
 	}
 
 	/**
-	 * ÇøÓò²éÑ¯
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯
 	 */
 	public ResultSet getAreaInfo(String areaNo) throws Exception {
 		String sql = "select    `ID` ,  `AREA_NO` , `AREA_NAME` ,"
@@ -308,7 +308,7 @@ public class GraphDao {
 	}
 
 	/**
-	 * µÃµ½È«²¿²»ÖØ¸´µÄ½¨Öþ
+	 * ï¿½Ãµï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½Ä½ï¿½ï¿½ï¿½
 	 */
 
 	public ResultSet getAllBuilding() throws Exception {
@@ -318,7 +318,7 @@ public class GraphDao {
 	}
 
 	/**
-	 * Â¥Óî²éÑ¯
+	 * Â¥ï¿½ï¿½ï¿½Ñ¯
 	 * 
 	 * @param areaNo
 	 * @param buildNo
@@ -342,7 +342,7 @@ public class GraphDao {
 	}
 
 	/**
-	 * Â¥²ã²éÑ¯
+	 * Â¥ï¿½ï¿½ï¿½Ñ¯
 	 */
 
 	public ResultSet getFloorInfo(String areaNo, String buildNo, String floorNo)
@@ -367,7 +367,7 @@ public class GraphDao {
 	}
 
 	/**
-	 * 5.1.5.4.1 ·¿¼äÐÅÏ¢»ñÈ¡ÇëÇó
+	 * 5.1.5.4.1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 	 */
 
 	public ResultSet getDoorInfo(String areaNo, String buildNo, String floorNo,

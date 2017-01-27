@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.aiyc.framework.utils.StringUtils;
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasindoor.locale.net.model.CreateGenModelReqMessage;
 
 public class ModelDao {
@@ -37,7 +37,7 @@ public class ModelDao {
 
 		sql += "" + "  )   ";
 
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 
 		list = new ArrayList();
 		sql = "delete from `x_tmnlpos` " + "  where  build_no=? ";
@@ -51,7 +51,7 @@ public class ModelDao {
 			sql += " and pos_no=? ";
 			list.add(posNo);
 		}
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 
 	}
 
@@ -114,7 +114,7 @@ public class ModelDao {
 				list.add(posNo);
 				list.add(buildNo);
 				list.add(floorNo);
-				DaoUtil.executeQuery(sql, list.toArray());
+				DaoUtil.executeUpdate(sql, list.toArray());
 			}
 
 			List<CreateGenModelReqMessage.Geo> geo = pos.GEO_INFO;
@@ -137,13 +137,13 @@ public class ModelDao {
 				list.add(ge.xMagnetic);
 				list.add(ge.yMagnetic);
 				list.add(ge.zMagnetic);
-				DaoUtil.executeQuery(sql, list.toArray());
+				DaoUtil.executeUpdate(sql, list.toArray());
 				index++;
 			}
 
 			sql = "update x_tmnlpos set tmnl_num=tmnl_num+?  where  pos_id=?  ";
 
-			DaoUtil.executeQuery(sql, new Object[] { index, posId });
+			DaoUtil.executeUpdate(sql, new Object[] { index, posId });
 
 		}
 	}

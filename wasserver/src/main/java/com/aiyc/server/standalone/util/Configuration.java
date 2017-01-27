@@ -15,9 +15,9 @@ import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import com.aiyc.server.standalone.db.DatabaseConnection;
 import com.aiyc.server.standalone.svm.SVMSupport;
 import com.aiyc.server.standalone.svm.TrainSVMTimerTask;
+import com.waspring.wasdbtools.DatabaseConnection;
 
 /**
  * Configuration class which represents all configuration settings. Before the

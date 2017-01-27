@@ -8,7 +8,7 @@ import java.util.List;
 import com.aiyc.framework.utils.DateUtils;
 import com.aiyc.framework.utils.StringUtils;
 import com.aiyc.framework.utils.UID;
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasservice.net.dao.area.GraphDao;
 import com.waspring.wasservice.net.dao.comm.CommDao;
 import com.waspring.wasservice.net.model.seller.AddFreeReqMessage;
@@ -40,12 +40,12 @@ public class SellerDao {
 			list.add(next.SDATE);
 			list.add(next.EDATE);
 			list.add(next.HB);
-			DaoUtil.executeQuery(sql, list.toArray());
+			DaoUtil.executeUpdate(sql, list.toArray());
 		}
 	}
 
 	/**
-	 * »ñÈ¡ÓÅ»Ý
+	 * ï¿½ï¿½È¡ï¿½Å»ï¿½
 	 */
 
 	public ResultSet getSellerFree(String sjNo, String key) throws Exception {
@@ -68,7 +68,7 @@ public class SellerDao {
 	}
 
 	/**
-	 * Ìí¼ÓÉÌÆ·
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 	 * 
 	 * @param model
 	 * @throws Exception
@@ -86,7 +86,7 @@ public class SellerDao {
 
 		while (it.hasNext()) {
 			GetProductRepMessage next = it.next();
-			DaoUtil.executeQuery("delete from s_product where cp_no=?     ",
+			DaoUtil.executeUpdate("delete from s_product where cp_no=?     ",
 					new Object[] { next.CP_NO });
 
 			List list = new ArrayList();
@@ -116,13 +116,13 @@ public class SellerDao {
 			list.add("01");
 			list.add(next.CP_KEY);
 			list.add(sjNo);
-			DaoUtil.executeQuery(sql, list.toArray());
+			DaoUtil.executeUpdate(sql, list.toArray());
 		}
 
 	}
 
 	/**
-	 * ÉÌ¼ÒÈë×¤
+	 * ï¿½Ì¼ï¿½ï¿½ï¿½×¤
 	 */
 	public String saveSeller(SellerJoinReqMessage model) throws Exception {
 		String sql = "INSERT INTO s_seller\n"
@@ -152,12 +152,12 @@ public class SellerDao {
 		list.add(model.MESSAGE.DOOR_NO);
 		list.add("01");
 		list.add(model.MESSAGE.USER_NO);
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 		return sjNo;
 	}
 
 	/**
-	 * ÉÌ¼ÒÐÅÏ¢ÐÞ¸Ä
+	 * ï¿½Ì¼ï¿½ï¿½ï¿½Ï¢ï¿½Þ¸ï¿½
 	 */
 	public String editSeller(SellerJoinReqMessage model) throws Exception {
 
@@ -202,12 +202,12 @@ public class SellerDao {
 		sql += " where sj_no=? ";
 		list.add(model.MESSAGE.USER_NO);
 
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 		return model.MESSAGE.SJ_NO;
 	}
 
 	/**
-	 * ²éÑ¯²úÆ·
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½Æ·
 	 */
 
 	public ResultSet getProduct(String sjNo, String key, String cpNo)
@@ -243,7 +243,7 @@ public class SellerDao {
 	}
 
 	/**
-	 * Í¨¹ý¹Ø¼ü×ÖºÍÉÌ¼Ò±àºÅ²éÑ¯ÉÌ¼Ò
+	 * Í¨ï¿½ï¿½Ø¼ï¿½ï¿½Öºï¿½ï¿½Ì¼Ò±ï¿½Å²ï¿½Ñ¯ï¿½Ì¼ï¿½
 	 */
 	public ResultSet getSeller(String sjNo, String key) throws Exception {
 		String sql = "SELECT\n" + "s_seller.SJ_NO,\n" + "s_seller.SJ_NAME,\n"

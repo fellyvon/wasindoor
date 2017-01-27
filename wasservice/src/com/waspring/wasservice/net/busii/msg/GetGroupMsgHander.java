@@ -3,7 +3,6 @@ package com.waspring.wasservice.net.busii.msg;
 import java.util.List;
 
 import com.aiyc.framework.annotation.Requestable;
-import com.aiyc.framework.component.CachedRowSet;
 import com.aiyc.framework.utils.ResultToObject;
 import com.aiyc.framework.utils.StringUtils;
 import com.aiyc.server.standalone.json.GsonFactory;
@@ -11,12 +10,13 @@ import com.aiyc.server.standalone.net.IHandler;
 import com.aiyc.server.standalone.net.Response;
 import com.aiyc.server.standalone.net.Response.Status;
 import com.google.gson.JsonElement;
+import com.waspring.wasdb.comp.CachedRowSet;
 import com.waspring.wasservice.net.dao.msg.MsgDao;
 import com.waspring.wasservice.net.model.msg.GetGroupMsgRepMessage;
 import com.waspring.wasservice.net.model.msg.GetGroupMsgReqMessage;
 
 /**
- * 5.1.7.2.11 Èº×éÏûÏ¢½ÓÊÕÇëÇó ·þÎñÃû³Æ GET_GROUPMSG_REQ/Èº×éÏûÏ¢½ÓÊÜÇëÇó
+ * 5.1.7.2.11 Èºï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ GET_GROUPMSG_REQ/Èºï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  * @author felly
  * 
@@ -31,21 +31,21 @@ public class GetGroupMsgHander implements IHandler {
 		GetGroupMsgRepMessage rm = new GetGroupMsgRepMessage();
 		if (StringUtils.isNullOrBank(model.MESSAGE.RCVER_NO)) {
 			rm.RTN_FLAG = "0";
-			rm.RTN_MSG = "½ÓÊÕÈË±ØÐë´«Èë£¡";
+			rm.RTN_MSG = "ï¿½ï¿½ï¿½ï¿½ï¿½Ë±ï¿½ï¿½ë´«ï¿½ë£¡";
 			return new Response(Status.failed, rm.RTN_MSG, rm.toJson());
 		}
 
 		if (StringUtils.isNullOrBank(model.MESSAGE.GROUP_ID)) {
 			rm.RTN_FLAG = "0";
-			rm.RTN_MSG = "Èº×é±àºÅ±ØÐë´«Èë£¡";
+			rm.RTN_MSG = "Èºï¿½ï¿½ï¿½Å±ï¿½ï¿½ë´«ï¿½ë£¡";
 			return new Response(Status.failed, rm.RTN_MSG, rm.toJson());
 		}
-		CachedRowSet rs = (com.aiyc.framework.component.CachedRowSet) dao
+		CachedRowSet rs = (CachedRowSet) dao
 				.getGroupMsg(model.MESSAGE.GROUP_ID, model.MESSAGE.RCVER_NO);
 
 		if (rs.getRowCount() == 0) {
 			rm.RTN_FLAG = "0";
-			rm.RTN_MSG = "ÎÞÏûÏ¢£¡";
+			rm.RTN_MSG = "ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½";
 
 			return new Response(Status.failed, rm.RTN_MSG, rm.toJson());
 		}
@@ -56,10 +56,10 @@ public class GetGroupMsgHander implements IHandler {
 		rm.GROUP_ID = model.MESSAGE.GROUP_ID;
 		rm.MSG_LIST = MSG_LIST;
 		rm.RTN_FLAG = "1";
-		rm.RTN_MSG = "½ÓÊÕ³É¹¦£¡";
+		rm.RTN_MSG = "ï¿½ï¿½ï¿½Õ³É¹ï¿½ï¿½ï¿½";
 
 		
-		///////¹éµµÏûÏ¢
+		///////ï¿½éµµï¿½ï¿½Ï¢
 		dao.arcGroupMsg(model);
 		return new Response(Status.ok, rm.RTN_MSG, rm.toJson());
 

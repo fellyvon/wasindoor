@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.aiyc.framework.utils.StringUtils;
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasservice.net.model.seller.SearchCouponReqMessage;
 import com.waspring.wasservice.net.model.seller.SearchDealReqMessage;
 import com.waspring.wasservice.net.model.seller.SearchSjReqMessage;
 
 public class SearchDao {
 	/**
-	 * ╡Ия╞се╩щпео╒
+	 * О©╫О©╫я╞О©╫е╩О©╫О©╫О©╫о╒
 	 */
 
 	public ResultSet queryCoupon(SearchCouponReqMessage model) throws Exception {
@@ -119,15 +119,15 @@ public class SearchDao {
 				* Integer.parseInt(model.MESSAGE.limit);
 
 		String sort = model.MESSAGE.sort;
-		// 1:д╛хоё╛
-		// 2:пг╪╤╦ъсеохё╛
-		// 3:╡Зф╥фю╪ш╦ъсеохё╛
-		// 4:╩╥╬Ёфю╪ш╦ъсеохё╛
-		// 5:╥ЧнЯфю╪ш╦ъсеохё╛
-		// 6:╣ЦфюйЩа©╤Юсеохё╛
-		// 7:юК╢╚хК╬╜нЁ╤хвЬ╠Й╬ЮюК╫Эсеохё╛
-		// 8:хк╬Ы╪ш╦Я╣мсеохё╛
-		// 9ё╨хк╬Ы╪ш╦Я╦ъсеох
+		// 1:д╛О©╫оёО©╫
+		// 2:О©╫г╪О©╫О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 3:О©╫О©╫ф╥О©╫О©╫О©╫ш╦О©╫О©╫О©╫О©╫хёО©╫
+		// 4:О©╫О©╫О©╫О©╫О©╫О©╫О©╫ш╦О©╫О©╫О©╫О©╫хёО©╫
+		// 5:О©╫О©╫О©╫О©╫О©╫О©╫О©╫ш╦О©╫О©╫О©╫О©╫хёО©╫
+		// 6:О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 7:О©╫К╢╚О©╫К╬╜нЁО©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 8:О©╫к╬О©╫ш╦О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 9О©╫О©╫О©╫к╬О©╫ш╦О©╫О©╫О©╫О©╫О©╫О©╫
 
 		Map map = new HashMap();
 		map.put("2", "avg_rating desc");
@@ -152,7 +152,7 @@ public class SearchDao {
 	}
 
 	/**
-	 * ╡Ия╞ме╧╨пео╒
+	 * О©╫О©╫я╞О©╫е╧О©╫О©╫О©╫о╒
 	 */
 	public ResultSet queryDeals(String bsId) throws Exception {
 
@@ -166,7 +166,7 @@ public class SearchDao {
 	}
 
 	/**
-	 * ╡Ия╞
+	 * О©╫О©╫я╞
 	 */
 	public ResultSet querySJ(SearchSjReqMessage model) throws Exception {
 
@@ -312,15 +312,15 @@ public class SearchDao {
 				* Integer.parseInt(model.MESSAGE.limit);
 
 		String sort = model.MESSAGE.sort;
-		// 1:д╛хоё╛
-		// 2:пг╪╤╦ъсеохё╛
-		// 3:╡Зф╥фю╪ш╦ъсеохё╛
-		// 4:╩╥╬Ёфю╪ш╦ъсеохё╛
-		// 5:╥ЧнЯфю╪ш╦ъсеохё╛
-		// 6:╣ЦфюйЩа©╤Юсеохё╛
-		// 7:юК╢╚хК╬╜нЁ╤хвЬ╠Й╬ЮюК╫Эсеохё╛
-		// 8:хк╬Ы╪ш╦Я╣мсеохё╛
-		// 9ё╨хк╬Ы╪ш╦Я╦ъсеох
+		// 1:д╛О©╫оёО©╫
+		// 2:О©╫г╪О©╫О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 3:О©╫О©╫ф╥О©╫О©╫О©╫ш╦О©╫О©╫О©╫О©╫хёО©╫
+		// 4:О©╫О©╫О©╫О©╫О©╫О©╫О©╫ш╦О©╫О©╫О©╫О©╫хёО©╫
+		// 5:О©╫О©╫О©╫О©╫О©╫О©╫О©╫ш╦О©╫О©╫О©╫О©╫хёО©╫
+		// 6:О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 7:О©╫К╢╚О©╫К╬╜нЁО©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 8:О©╫к╬О©╫ш╦О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 9О©╫О©╫О©╫к╬О©╫ш╦О©╫О©╫О©╫О©╫О©╫О©╫
 
 		Map map = new HashMap();
 		map.put("2", "avg_rating desc");
@@ -345,7 +345,7 @@ public class SearchDao {
 	}
 
 	/**
-	 * ╡Ия╞ме╧╨пео╒
+	 * О©╫О©╫я╞О©╫е╧О©╫О©╫О©╫о╒
 	 */
 
 	public ResultSet queryDeal(SearchDealReqMessage model) throws Exception {
@@ -456,15 +456,15 @@ public class SearchDao {
 				* Integer.parseInt(model.MESSAGE.limit);
 
 		String sort = model.MESSAGE.sort;
-		// 1:д╛хоё╛
-		// 2:пг╪╤╦ъсеохё╛
-		// 3:╡Зф╥фю╪ш╦ъсеохё╛
-		// 4:╩╥╬Ёфю╪ш╦ъсеохё╛
-		// 5:╥ЧнЯфю╪ш╦ъсеохё╛
-		// 6:╣ЦфюйЩа©╤Юсеохё╛
-		// 7:юК╢╚хК╬╜нЁ╤хвЬ╠Й╬ЮюК╫Эсеохё╛
-		// 8:хк╬Ы╪ш╦Я╣мсеохё╛
-		// 9ё╨хк╬Ы╪ш╦Я╦ъсеох
+		// 1:д╛О©╫оёО©╫
+		// 2:О©╫г╪О©╫О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 3:О©╫О©╫ф╥О©╫О©╫О©╫ш╦О©╫О©╫О©╫О©╫хёО©╫
+		// 4:О©╫О©╫О©╫О©╫О©╫О©╫О©╫ш╦О©╫О©╫О©╫О©╫хёО©╫
+		// 5:О©╫О©╫О©╫О©╫О©╫О©╫О©╫ш╦О©╫О©╫О©╫О©╫хёО©╫
+		// 6:О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 7:О©╫К╢╚О©╫К╬╜нЁО©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 8:О©╫к╬О©╫ш╦О©╫О©╫О©╫О©╫О©╫хёО©╫
+		// 9О©╫О©╫О©╫к╬О©╫ш╦О©╫О©╫О©╫О©╫О©╫О©╫
 
 		Map map = new HashMap();
 		map.put("2", "avg_rating desc");

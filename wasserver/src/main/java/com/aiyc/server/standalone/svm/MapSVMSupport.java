@@ -23,9 +23,9 @@ import com.aiyc.server.standalone.core.Fingerprint;
 import com.aiyc.server.standalone.core.Location;
 import com.aiyc.server.standalone.core.Measurement;
 import com.aiyc.server.standalone.core.measure.WiFiReading;
-import com.aiyc.server.standalone.db.DaoUtil;
 import com.aiyc.server.standalone.db.HomeFactory;
 import com.aiyc.server.standalone.util.Log;
+import com.waspring.wasdbtools.DaoUtil;
 
 /**
  * 
@@ -124,7 +124,7 @@ public class MapSVMSupport {
 		if (!isTrained(mapId)) {
 			String sql = "insert into  svmmodel(mapID,filePath,loationCount,traindate)values(?,?,?,now())";
 			try {
-				DaoUtil.executeQuery(sql, new Object[] { mapId, fileName,
+				DaoUtil.executeUpdate(sql, new Object[] { mapId, fileName,
 						20 });
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -132,7 +132,7 @@ public class MapSVMSupport {
 		} else {
 			String sql = "update  svmmodel set traindate=now(),filePath=? where mapId=?";
 			try {
-				DaoUtil.executeQuery(sql, new Object[] { fileName, mapId });
+				DaoUtil.executeUpdate(sql, new Object[] { fileName, mapId });
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

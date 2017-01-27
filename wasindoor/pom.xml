@@ -2,10 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.waspring</groupId>
+	<groupId>com.waspring.wasindoor</groupId>
 	<artifactId>wasindoor</artifactId>
 	<version>v0.0.1</version>
 	<packaging>jar</packaging>
+	<description>wasindoor, a WiFi and geomagnetic signal based indoor positioning solutions, integrated SVM and KNN algorithm.
+The project is divided into 6 directories: 1, Doc here to store the project used in the design documents, interface documents, etc.. 2, output here to store the current backbone compiled executable jar package, easy to use. 3, wascore stored in the project's core class and tools, the highest level of abstraction. 4, wasindoor here to store indoor positioning algorithm algorithm, as well as providing a unified external positioning support interface. 5, wasserver here to store the solution interface framework to achieve, is the core of the project business. 6, wasservice here to store indoor solutions business interface code, the specific implementation of the business can refer to the doc interface description.</description>
 
 	<name>waspring-indoor-wasindoor</name>
 	<url>http://www.waspring.com</url>
@@ -17,21 +19,46 @@
 	</properties>
 
 	<dependencies>
-	<!-- 如果有本地库，这里的绝对路径要换成本地库路径 -->
+ 
+
 		<dependency>
-			<groupId>com.waspring</groupId>
-			<artifactId>wascore</artifactId>
-			<version>v0.0.1</version>
-			<scope>system</scope>
-			<systemPath>E:\建设中\室内定位\wasIndoor\wascore\target\wascore-v0.0.1.jar</systemPath>
+			<groupId>com.waspring.wasdb</groupId>
+			<artifactId>wasdbtools</artifactId>
+			<version>1.0.0</version>
 		</dependency>
-	<!-- 如果有本地库，这里的绝对路径要换成本地库路径 -->
+
+
 		<dependency>
-			<groupId>com.waspring</groupId>
+			<groupId>com.waspring.wasindoor</groupId>
 			<artifactId>wasserver</artifactId>
 			<version>v0.0.1</version>
-			<scope>system</scope>
-			<systemPath>E:\建设中\室内定位\wasIndoor\wasserver\target\wasserver-v0.0.1.jar</systemPath>
 		</dependency>
+
 	</dependencies>
+
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>git@github.com:fellyvon/wasindoor</url>
+		<connection>git@github.com:fellyvon/wasindoor.git</connection>
+		<developerConnection>http://www.waspring.com</developerConnection>
+	</scm>
+	<developers>
+		<developer>
+			<name>felly von</name>
+			<email>fellyvon@foxmail.com</email>
+			<url>http://www.waspring.com</url>
+		</developer>
+	</developers>
 </project>

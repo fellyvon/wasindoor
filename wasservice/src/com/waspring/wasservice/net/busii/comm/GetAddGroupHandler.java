@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aiyc.framework.annotation.Requestable;
-import com.aiyc.framework.component.CachedRowSet;
 import com.aiyc.server.standalone.json.GsonFactory;
 import com.aiyc.server.standalone.net.IHandler;
 import com.aiyc.server.standalone.net.Response;
 import com.aiyc.server.standalone.net.Response.Status;
 import com.google.gson.JsonElement;
+import com.waspring.wasdb.comp.CachedRowSet;
 import com.waspring.wasservice.net.dao.comm.GroupDao;
 import com.waspring.wasservice.net.model.GetUserReqMessage;
 import com.waspring.wasservice.net.model.comm.GetAddGroupRepMessage;
@@ -39,11 +39,11 @@ public class GetAddGroupHandler implements IHandler {
 		if (cs.getRowCount() > 0) {
 			rep.ADDGROUPLIST = ADDGROUPLIST;
 			rep.RTN_FLAG = "1";
-			rep.RTN_MSG = "²éÑ¯³É¹¦£¡";
+			rep.RTN_MSG = "ï¿½ï¿½Ñ¯ï¿½É¹ï¿½ï¿½ï¿½";
 			return new Response(Status.ok, rep.RTN_MSG, rep.toJson());
 		} else {
 			rep.RTN_FLAG = "0";
-			rep.RTN_MSG = "²éÑ¯Ê§°Ü£¬ÎÞÇëÇó£¡";
+			rep.RTN_MSG = "ï¿½ï¿½Ñ¯Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 			return new Response(Status.failed, rep.RTN_MSG, rep.toJson());
 		}
 

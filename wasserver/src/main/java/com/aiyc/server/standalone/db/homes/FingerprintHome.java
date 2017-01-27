@@ -15,9 +15,9 @@ import com.aiyc.server.standalone.core.Fingerprint;
 import com.aiyc.server.standalone.core.Location;
 import com.aiyc.server.standalone.core.Measurement;
 import com.aiyc.server.standalone.core.Vector;
-import com.aiyc.server.standalone.db.DaoUtil;
-import com.aiyc.server.standalone.db.DatabaseConnection;
 import com.aiyc.server.standalone.db.HomeFactory;
+import com.waspring.wasdbtools.DaoUtil;
+import com.waspring.wasdbtools.DatabaseConnection;
  
 public class FingerprintHome extends EntityHome<Fingerprint> {
 

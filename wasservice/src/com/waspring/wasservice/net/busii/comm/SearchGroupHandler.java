@@ -3,19 +3,19 @@ package com.waspring.wasservice.net.busii.comm;
 import java.util.List;
 
 import com.aiyc.framework.annotation.Requestable;
-import com.aiyc.framework.component.CachedRowSet;
 import com.aiyc.framework.utils.ResultToObject;
 import com.aiyc.server.standalone.json.GsonFactory;
 import com.aiyc.server.standalone.net.IHandler;
 import com.aiyc.server.standalone.net.Response;
 import com.aiyc.server.standalone.net.Response.Status;
 import com.google.gson.JsonElement;
+import com.waspring.wasdb.comp.CachedRowSet;
 import com.waspring.wasservice.net.dao.comm.GroupDao;
 import com.waspring.wasservice.net.model.comm.GetGroupRepMessage;
 import com.waspring.wasservice.net.model.comm.SearchGroupReqMessage;
 
 /**
- * Èº×éËÑË÷
+ * Èºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  * @author felly
  * 
@@ -32,7 +32,7 @@ public class SearchGroupHandler implements IHandler {
 		SearchGroupReqMessage model = GsonFactory.getGsonInstance().fromJson(
 				data, SearchGroupReqMessage.class);
 
-		com.aiyc.framework.component.CachedRowSet set = (CachedRowSet) dao
+	 CachedRowSet set = (CachedRowSet) dao
 				.searchGroup(model.MESSAGE.GROUP_ID, model.MESSAGE.GROUP_NAME,
 						model.MESSAGE.GROUP_FUN);
 
@@ -43,11 +43,11 @@ public class SearchGroupHandler implements IHandler {
 					GetGroupRepMessage.Groups.class, set);
 			rep.GROUP_LIST = gs;
 			rep.RTN_FLAG = "1";
-			rep.RTN_MSG = "²Ù×÷³É¹¦£¡";
+			rep.RTN_MSG = "ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½";
 			return new Response(Status.ok, rep.RTN_MSG, rep.toJson());
 		} else {
 			rep.RTN_FLAG = "0";
-			rep.RTN_MSG = "ÎÞÈº×é£¡";
+			rep.RTN_MSG = "ï¿½ï¿½Èºï¿½é£¡";
 			return new Response(Status.failed, rep.RTN_MSG, rep.toJson());
 		}
 	}

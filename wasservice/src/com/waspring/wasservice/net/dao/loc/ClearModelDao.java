@@ -1,6 +1,6 @@
 package com.waspring.wasservice.net.dao.loc;
 
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 
 public class ClearModelDao {
 
@@ -22,7 +22,7 @@ public class ClearModelDao {
 				+ "                  where  locationId in\n"
 				+ "                        (select locationId from location n where mapId = ?)))";
 
-		DaoUtil.executeQuery(sql, new Object[] { mapNo });
+		DaoUtil.executeUpdate(sql, new Object[] { mapNo });
 
 		sql = "delete\n"
 				+ "  from readinginmeasurement\n"
@@ -31,20 +31,20 @@ public class ClearModelDao {
 				+ "          from fingerprint\n"
 				+ "         where locationId in\n"
 				+ "               (select locationId from location where mapId = ?));";
-		DaoUtil.executeQuery(sql, new Object[] { mapNo });
+		DaoUtil.executeUpdate(sql, new Object[] { mapNo });
 
 		sql = "delete\n" + "  from fingerprint\n"
 				+ " where locationId in  (select locationId\n"
 				+ "          from location\n" + "         where  mapId = ?)";
-		DaoUtil.executeQuery(sql, new Object[] { mapNo });
+		DaoUtil.executeUpdate(sql, new Object[] { mapNo });
 
 		sql = "delete from location where mapId = ?";
 
-		DaoUtil.executeQuery(sql, new Object[] { mapNo });
+		DaoUtil.executeUpdate(sql, new Object[] { mapNo });
 
 		sql = "delete from `macadresslist` where MAP_ID = ?";
 
-		DaoUtil.executeQuery(sql, new Object[] { mapNo });
+		DaoUtil.executeUpdate(sql, new Object[] { mapNo });
 
 	}
 }

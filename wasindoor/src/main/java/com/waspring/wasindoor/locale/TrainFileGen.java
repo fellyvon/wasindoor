@@ -5,8 +5,8 @@ import java.io.FileWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.aiyc.server.standalone.db.DaoUtil;
 import com.aiyc.server.standalone.util.Configuration;
+import com.waspring.wasdbtools.DaoUtil;
 
 /**
  * 产生训练文件

@@ -6,15 +6,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-import com.aiyc.server.standalone.db.DaoUtil;
-import com.aiyc.server.standalone.db.DatabaseConnection;
+import com.waspring.wasdbtools.DaoUtil;
+import com.waspring.wasdbtools.DatabaseConnection;
 import com.waspring.wasservice.net.model.SetModelReqMessage;
 
 public class ModelDao {
 
 	public synchronized int saveModel(SetModelReqMessage model)
 			throws Exception {
-		// /±£´æÎ»ÖÃÐÅÏ¢
+		// /ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢
 		int reulst = 0;
 		int locationId = getPrimaryKeyId("location", "locationId");
 		int measurementId = getPrimaryKeyId("measurement", "measurementId");
@@ -29,7 +29,7 @@ public class ModelDao {
 
 			String uuid = UUID.randomUUID().toString();
 			java.sql.PreparedStatement stmt = conn.prepareStatement(sql);
-			DaoUtil.executeQuery(stmt, sql, new Object[] { locationId,
+			DaoUtil.executeUpdate(stmt, sql, new Object[] { locationId,
 					model.MESSAGE.LOCATION.X + model.MESSAGE.LOCATION.Y,
 					model.MESSAGE.MAP_NO,  model.MESSAGE.LOCATION.X,
 					 model.MESSAGE.LOCATION.Y, "0" });
@@ -37,13 +37,13 @@ public class ModelDao {
 			sql = "insert into measurement(measurementId,timestamp)values(?,?)";
 			stmt = conn.prepareStatement(sql);
 
-			DaoUtil.executeQuery(stmt, sql, new Object[] { measurementId,
+			DaoUtil.executeUpdate(stmt, sql, new Object[] { measurementId,
 					System.currentTimeMillis() });
 
 			sql = "insert into fingerprint(locationId,measurementId)values(?,?)";
 			stmt = conn.prepareStatement(sql);
 
-			DaoUtil.executeQuery(stmt, sql, new Object[] { locationId,
+			DaoUtil.executeUpdate(stmt, sql, new Object[] { locationId,
 					measurementId
 
 			});
@@ -77,14 +77,14 @@ public class ModelDao {
 					us = "0";
 				}
 
-				DaoUtil.executeQuery(stmt, sql, new Object[] { wifiReadingId,
+				DaoUtil.executeUpdate(stmt, sql, new Object[] { wifiReadingId,
 						ap.AP_MAC, ap.AP_NAME, ap.AP_VALUE, wep, us
 
 				});
 
 				sql = "insert into readinginmeasurement(measurementId,readingId,readingClassName) values(?,?,?)";
 				stmt = conn.prepareStatement(sql);
-				DaoUtil.executeQuery(stmt, sql, new Object[] { measurementId,
+				DaoUtil.executeUpdate(stmt, sql, new Object[] { measurementId,
 						wifiReadingId, "WiFiReading"
 
 				});
@@ -98,7 +98,7 @@ public class ModelDao {
 					sql = "insert into `macadresslist`(`MAC`,`MAP_ID`) values(?,?)";
 
 					stmt = conn.prepareStatement(sql);
-					DaoUtil.executeQuery(stmt, sql, new Object[] { ap.AP_MAC,
+					DaoUtil.executeUpdate(stmt, sql, new Object[] { ap.AP_MAC,
 							model.MESSAGE.MAP_NO
 
 					});
@@ -123,7 +123,7 @@ public class ModelDao {
 	}
 
 	/**
-	 * µÃµ½Î»ÖÃÊýÁ¿
+	 * ï¿½Ãµï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public int getCountLocation(String mapId, String x, String y)
 			throws Exception {
@@ -164,7 +164,7 @@ public class ModelDao {
 	}
 
 	/**
-	 * »ñÈ¡µØÍ¼ÉÏ¶àÉÙ¸öµãÎ»µÄÇé¿öÏÂ²»¾ÍÐÐÑµÁ·Ëã·¨
+	 * ï¿½ï¿½È¡ï¿½ï¿½Í¼ï¿½Ï¶ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â²ï¿½ï¿½ï¿½ï¿½ï¿½Ñµï¿½ï¿½ï¿½ã·¨
 	 */
 	public static final int MAX_TRAIN_POINT_LOC = 20;
 

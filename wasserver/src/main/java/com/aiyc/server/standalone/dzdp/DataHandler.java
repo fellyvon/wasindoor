@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 import com.aiyc.framework.utils.StringUtils;
-import com.aiyc.server.standalone.db.DaoUtil;
 import com.aiyc.server.standalone.dzdp.DealsDetail.Restrictions;
 import com.aiyc.server.standalone.util.ReflectHelper;
+import com.waspring.wasdbtools.DaoUtil;
 
 public class DataHandler {
 
@@ -20,28 +19,28 @@ public class DataHandler {
 		String sql = "delete from     s_restrictions where "
 				+ " deal_id in(select deal_id from  s_deals  "
 				+ " where  business_id=?)";
-		DaoUtil.executeQuery(sql, new Object[] { bsId });
+		DaoUtil.executeUpdate(sql, new Object[] { bsId });
 
 		sql = "delete from     s_deals_detail where "
 				+ " deal_id in(select deal_id from  s_deals  "
 				+ " where  business_id=?)";
-		DaoUtil.executeQuery(sql, new Object[] { bsId });
+		DaoUtil.executeUpdate(sql, new Object[] { bsId });
 
 		sql = "delete from   s_deals  where business_id=?";
-		DaoUtil.executeQuery(sql, new Object[] { bsId });
+		DaoUtil.executeUpdate(sql, new Object[] { bsId });
 
 		sql = "delete from   s_businesses_detail   where  business_id=?";
-		DaoUtil.executeQuery(sql, new Object[] { bsId });
+		DaoUtil.executeUpdate(sql, new Object[] { bsId });
 
 		sql = "delete from   s_coupon_detail  where  coupon_id "
 				+ "in(select  coupon_id  from s_coupon     where    business_id=?  )";
-		DaoUtil.executeQuery(sql, new Object[] { bsId });
+		DaoUtil.executeUpdate(sql, new Object[] { bsId });
 
 		sql = "delete from     s_coupon    where   business_id=?  ";
-		DaoUtil.executeQuery(sql, new Object[] { bsId });
+		DaoUtil.executeUpdate(sql, new Object[] { bsId });
 
 		sql = "delete from     s_businesses    where    business_id=?  ";
-		DaoUtil.executeQuery(sql, new Object[] { bsId });
+		DaoUtil.executeUpdate(sql, new Object[] { bsId });
 	}
 
 	public void saveBusinesses(Businesses bs) throws Exception {
@@ -53,7 +52,7 @@ public class DataHandler {
 		String sql = "insert into s_businesses(  `business_id` ,  `business_name` ,"
 				+ " `business_url` ,  `business_h5_url`,area_no,build_no,floor_no,door_no"
 				+ ")values(?,?,?,?,?,?,?,?) ";
-		DaoUtil.executeQuery(sql, new Object[] { bs.business_id, bs.name,
+		DaoUtil.executeUpdate(sql, new Object[] { bs.business_id, bs.name,
 				bs.business_url, bs.business_url, bs.area_no, bs.build_no,
 				bs.floor_no, bs.door_no });
 
@@ -61,7 +60,7 @@ public class DataHandler {
 				&& !"0".equals(bs.coupon_id)) {
 			sql = "insert into s_coupon(  `coupon_id` ,  `business_id` ,"
 					+ " `coupon_description` ,  `coupon_url`)values(?,?,?,?) ";
-			DaoUtil.executeQuery(sql, new Object[] { bs.coupon_id,
+			DaoUtil.executeUpdate(sql, new Object[] { bs.coupon_id,
 					bs.business_id, bs.coupon_description, bs.coupon_url });
 
 		}
@@ -74,7 +73,7 @@ public class DataHandler {
 			sql = "insert into s_deals(  `deal_id` ,  `business_id` ,"
 					+ " `deals_description` ,  `deals_url`)values(?,?,?,?) ";
 
-			DaoUtil.executeQuery(sql, new Object[] { det.id, bs.business_id,
+			DaoUtil.executeUpdate(sql, new Object[] { det.id, bs.business_id,
 					det.description, det.url });
 		}
 
@@ -172,7 +171,7 @@ public class DataHandler {
 			}
 		}
 
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 
 	}
 
@@ -255,7 +254,7 @@ public class DataHandler {
 			}
 		}
 
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 
 		Restrictions o = deal.restrictions;
 
@@ -263,7 +262,7 @@ public class DataHandler {
 			sql = "insert into  s_restrictions(deal_id,is_reservation_required,"
 					+ "is_refundable,special_tips) values(?,?,?,?)";
 
-			DaoUtil.executeQuery(sql, new Object[] { deal.deal_id,
+			DaoUtil.executeUpdate(sql, new Object[] { deal.deal_id,
 					ReflectHelper.getFileValue(o, "is_reservation_required"),
 					ReflectHelper.getFileValue(o, "is_refundable"),
 					ReflectHelper.getFileValue(o, "special_tips")
@@ -329,7 +328,7 @@ public class DataHandler {
 			}
 		}
 
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 
 	}
 

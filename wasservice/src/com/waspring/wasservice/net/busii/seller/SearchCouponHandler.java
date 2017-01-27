@@ -3,7 +3,6 @@ package com.waspring.wasservice.net.busii.seller;
 import java.util.List;
 
 import com.aiyc.framework.annotation.Requestable;
-import com.aiyc.framework.component.CachedRowSet;
 import com.aiyc.framework.utils.ResultToObject;
 import com.aiyc.framework.utils.StringUtils;
 import com.aiyc.server.standalone.json.GsonFactory;
@@ -11,12 +10,13 @@ import com.aiyc.server.standalone.net.IHandler;
 import com.aiyc.server.standalone.net.Response;
 import com.aiyc.server.standalone.net.Response.Status;
 import com.google.gson.JsonElement;
+import com.waspring.wasdb.comp.CachedRowSet;
 import com.waspring.wasservice.net.dao.sell.SearchDao;
 import com.waspring.wasservice.net.model.seller.SearchCouponRepMessage;
 import com.waspring.wasservice.net.model.seller.SearchCouponReqMessage;
 
 /**
- * ËÑËØÉÌ¼ÒÍÅ¹ºÐÅÏ¢
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½Å¹ï¿½ï¿½ï¿½Ï¢
  * 
  * @author felly
  * 
@@ -36,7 +36,7 @@ public class SearchCouponHandler implements IHandler {
 				&& (StringUtils.isNullOrBank(model.MESSAGE.coupon_id) || "0"
 						.equals(model.MESSAGE.coupon_id))) {
 
-			res = new Response(Status.failed, "ÍÅ¹º±àºÅ¡¢¾­Î³¶È¡¢ÇøÓò±àºÅ±ØÊäÆäÒ»£¡£¡", reponse
+			res = new Response(Status.failed, "ï¿½Å¹ï¿½ï¿½ï¿½Å¡ï¿½ï¿½ï¿½Î³ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½", reponse
 					.toJson());
 
 			return res;
@@ -58,7 +58,7 @@ public class SearchCouponHandler implements IHandler {
 
 		SearchDao dao = new SearchDao();
 
-		com.aiyc.framework.component.CachedRowSet cs = (CachedRowSet) dao
+	CachedRowSet cs = (CachedRowSet) dao
 				.queryCoupon(model);
 
 		List<SearchCouponRepMessage.DataList> reps = ResultToObject.resultToBase(
@@ -68,14 +68,14 @@ public class SearchCouponHandler implements IHandler {
 
 		if (cs.getRowCount() == 0) {
 			reponse.RTN_FLAG = "0";
-			reponse.RTN_MSG = "¼ÇÂ¼Îª¿Õ!";
-			res = new Response(Status.failed, "²éÑ¯Ê§°Ü", reponse.toJson());
+			reponse.RTN_MSG = "ï¿½ï¿½Â¼Îªï¿½ï¿½!";
+			res = new Response(Status.failed, "ï¿½ï¿½Ñ¯Ê§ï¿½ï¿½", reponse.toJson());
 		}
 
 		else {
 			reponse.RTN_FLAG = "1";
-			reponse.RTN_MSG = "²éÑ¯³É¹¦!";
-			res = new Response(Status.ok, "²éÑ¯³É¹¦£¡", reponse.toJson());
+			reponse.RTN_MSG = "ï¿½ï¿½Ñ¯ï¿½É¹ï¿½!";
+			res = new Response(Status.ok, "ï¿½ï¿½Ñ¯ï¿½É¹ï¿½ï¿½ï¿½", reponse.toJson());
 		}
 
 		return res;

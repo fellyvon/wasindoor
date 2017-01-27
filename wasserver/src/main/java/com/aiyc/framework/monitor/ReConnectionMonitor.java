@@ -1,6 +1,6 @@
 package com.aiyc.framework.monitor;
 
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 
 public class ReConnectionMonitor implements DaoMonitor {
 	private String dbType;

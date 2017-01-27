@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.aiyc.framework.component.CachedRowSet;
 import com.aiyc.framework.utils.StringUtils;
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdb.comp.CachedRowSet;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasservice.net.dao.ModelDao;
 import com.waspring.wasservice.net.model.comm.CreateGroupReqMessage;
 import com.waspring.wasservice.net.model.comm.InviAddGroupReqMessage;
@@ -15,19 +15,19 @@ import com.waspring.wasservice.net.model.comm.InviAddGroupReqMessage;
 public class GroupDao {
 
 	/**
-	 * ¼ÓÈëÈº×é
+	 * ï¿½ï¿½ï¿½ï¿½Èºï¿½ï¿½
 	 */
 	public void addGroupUser(String groupId, String userNo) throws Exception {
 		String sql = "delete from t_group_user  where  USER_NO=? and  group_id=? ";
-		DaoUtil.executeQuery(sql, new Object[] { userNo, groupId });
+		DaoUtil.executeUpdate(sql, new Object[] { userNo, groupId });
 
 		sql = "insert into  t_group_user(USER_NO,group_id,ADD_TIME)"
 				+ " values(?,?,now())";
-		DaoUtil.executeQuery(sql, new Object[] { userNo, groupId });
+		DaoUtil.executeUpdate(sql, new Object[] { userNo, groupId });
 	}
 
 	/**
-	 * ²éÑ¯ÇëÇó
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	 */
 
 	public ResultSet queryAddGroupReq(String reqNo) throws Exception {
@@ -43,20 +43,20 @@ public class GroupDao {
 	}
 
 	/**
-	 * ±£´æ´¦Àí½á¹û
+	 * ï¿½ï¿½ï¿½æ´¦ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void rcvGroup(String reqNo, String rlt, String reason)
 			throws Exception {
 		String sql = "update    t_group_addinfo"
 				+ " set RCV_DATE=now(),STATUS=?,CONFU_RESON=? where id=?";
 
-		DaoUtil.executeQuery(sql, new Object[] { rlt, reason, reqNo
+		DaoUtil.executeUpdate(sql, new Object[] { rlt, reason, reqNo
 
 		});
 	}
 
 	/**
-	 * É¾³ý¹ØÏµ
+	 * É¾ï¿½ï¿½ï¿½Ïµ
 	 */
 
 	public void kickGroupUser(String groupId, String userNo, String kickNo,
@@ -69,15 +69,15 @@ public class GroupDao {
 				+ "\t\t\t\t\t AND g.user_no = ?\n"
 				+ "\t\t\t\t\t AND g.group_id = p.group_id";
 
-		DaoUtil.executeQuery(sql, new Object[] { msg, groupId, kickNo });
+		DaoUtil.executeUpdate(sql, new Object[] { msg, groupId, kickNo });
 
 		sql = "delete from  t_group_user g  where g.group_id = ? and  ND g.user_no = ?   ";
-		DaoUtil.executeQuery(sql, new Object[] { groupId, kickNo });
+		DaoUtil.executeUpdate(sql, new Object[] { groupId, kickNo });
 
 	}
 
 	/**
-	 * Ö÷¶¯ÍË³öÈº×é
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½Èºï¿½ï¿½
 	 */
 	public void unGroupUser(String groupId, String userNo, String msg)
 			throws Exception {
@@ -89,15 +89,15 @@ public class GroupDao {
 				+ "\t\t\t\t\t AND g.user_no = ?\n"
 				+ "\t\t\t\t\t AND g.group_id = p.group_id";
 
-		DaoUtil.executeQuery(sql, new Object[] { msg, groupId, userNo });
+		DaoUtil.executeUpdate(sql, new Object[] { msg, groupId, userNo });
 
 		sql = "delete from  t_group_user g  where g.group_id = ? and  ND g.user_no = ?   ";
-		DaoUtil.executeQuery(sql, new Object[] { groupId, userNo });
+		DaoUtil.executeUpdate(sql, new Object[] { groupId, userNo });
 
 	}
 
 	/**
-	 * ÅÐ¶ÏÊÇ·ñÓµÓÐÉ¾³ýµÄÈ¨ÏÞ
+	 * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Óµï¿½ï¿½É¾ï¿½ï¿½ï¿½È¨ï¿½ï¿½
 	 */
 
 	public boolean haveDel(String groupId, String userNo) throws Exception {
@@ -106,7 +106,7 @@ public class GroupDao {
 	}
 
 	/**
-	 * ÅÐ¶ÏÈËÔ±ÊÇ·ñÔÚ±¾ÈºÄÚ
+	 * ï¿½Ð¶ï¿½ï¿½ï¿½Ô±ï¿½Ç·ï¿½ï¿½Ú±ï¿½Èºï¿½ï¿½
 	 */
 	public boolean isInGroup(String groupId, String userNo) throws Exception {
 		String sql = "select 1 from t_group_user where group_id=? and user_No=? ";
@@ -114,7 +114,7 @@ public class GroupDao {
 	}
 
 	/**
-	 * ÉêÇëÈëÈº
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èº
 	 */
 	public void applyAddGroup(String groupId, String userNo, String msg)
 			throws Exception {
@@ -122,33 +122,30 @@ public class GroupDao {
 		String sql = "INSERT INTO t_group_addinfo\n"
 				+ "\t\t(send_user_no, rcv_no, group_id, content_msg, req_time, status,add_sort)\n"
 				+ "  select   ?,GROUP_NO,group_id,?,now(),'01','02' from   t_group where  group_id=?      ";
-		DaoUtil.executeQuery(sql, new Object[] { userNo, msg, groupId });
+		DaoUtil.executeUpdate(sql, new Object[] { userNo, msg, groupId });
 
 	}
 
 	/**
-	 * ²éÑ¯ÑûÇëÐÅÏ¢
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 
-	public com.aiyc.framework.component.CachedRowSet getAddGroup(String userNo)
-			throws Exception {
+	public CachedRowSet getAddGroup(String userNo) throws Exception {
 		String sql =
 
-			"SELECT t_group_addinfo.id, t_group_addinfo.send_user_no, t_group_addinfo.rcv_no,\n" +
-			"\t\t\t t_group_addinfo.group_id, t_group_addinfo.content_msg, t_group_addinfo.req_time,\n" + 
-			"\t\t\t t_group_addinfo.status, t_group_addinfo.add_sort\n" + 
-			"\tFROM t_group_addinfo\n" + 
-			" WHERE t_group_addinfo.rcv_no = ?\n" + 
-			"\t\t\t AND t_group_addinfo.status IN ('01', '02')\n" + 
-			"\t\t\t AND t_group_addinfo.add_sort IN ('01', '02') LIMIT 500";
+		"SELECT t_group_addinfo.id, t_group_addinfo.send_user_no, t_group_addinfo.rcv_no,\n"
+				+ "\t\t\t t_group_addinfo.group_id, t_group_addinfo.content_msg, t_group_addinfo.req_time,\n"
+				+ "\t\t\t t_group_addinfo.status, t_group_addinfo.add_sort\n"
+				+ "\tFROM t_group_addinfo\n"
+				+ " WHERE t_group_addinfo.rcv_no = ?\n"
+				+ "\t\t\t AND t_group_addinfo.status IN ('01', '02')\n"
+				+ "\t\t\t AND t_group_addinfo.add_sort IN ('01', '02') LIMIT 500";
 
-
-		return (CachedRowSet) DaoUtil.queryData(sql, new Object[] {  
-				userNo });
+		return (CachedRowSet) DaoUtil.queryData(sql, new Object[] { userNo });
 	}
 
 	/**
-	 * ÑûÇëÈëÈº
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èº
 	 */
 
 	public void inviAddGroup(InviAddGroupReqMessage model) throws Exception {
@@ -166,7 +163,7 @@ public class GroupDao {
 			list.add(invi.RCV_NO);
 			list.add(invi.GROUP_ID);
 			list.add(invi.CONTENT_MSG);
-			DaoUtil.executeQuery(sql, list.toArray());
+			DaoUtil.executeUpdate(sql, list.toArray());
 		}
 
 	}
@@ -240,7 +237,7 @@ public class GroupDao {
 	}
 
 	/**
-	 * ×éÈº
+	 * ï¿½ï¿½Èº
 	 */
 	public String createGroup(CreateGroupReqMessage model) throws Exception {
 
@@ -256,12 +253,11 @@ public class GroupDao {
 		list.add(model.MESSAGE.GROUP_FUN);
 		list.add(MAX_GROUP_USER);
 		list.add(model.MESSAGE.GROUP_REMARK);
-		DaoUtil.executeQuery(sql, list.toArray());
+		DaoUtil.executeUpdate(sql, list.toArray());
 
-		
-		////×Ô¼º¿Ï¶¨Òª¼ÓÈëÈº
-	    this.addGroupUser(groupId+"", model.MESSAGE.GROUP_NO);
-		
+		// //ï¿½Ô¼ï¿½ï¿½Ï¶ï¿½Òªï¿½ï¿½ï¿½ï¿½Èº
+		this.addGroupUser(groupId + "", model.MESSAGE.GROUP_NO);
+
 		return groupId + "";
 
 	}

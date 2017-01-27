@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aiyc.framework.utils.StringUtils;
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasservice.net.model.comm.AddFriendReqMessage;
 import com.waspring.wasservice.net.model.comm.SearchUserReqMessage;
 
@@ -98,7 +98,7 @@ public class CommDao {
 	}
 
 	/**
-	 * Í¨¹ýmapno²éÕÒÇøÓò£¬Â¥Óî£¬Â¥²ãÐÅÏ¢
+	 * Í¨ï¿½ï¿½mapnoï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥ï¿½î£¬Â¥ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 
 	public ResultSet getLoc(String mapNo) throws Exception {
@@ -110,7 +110,7 @@ public class CommDao {
 	}
 
 	/**
-	 * ²éÑ¯µØÍ¼±àºÅ
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½Í¼ï¿½ï¿½ï¿½
 	 */
 
 	public String getMapNo(String mac) throws Exception {
@@ -124,7 +124,7 @@ public class CommDao {
 	}
 
 	/**
-	 * ÅÐ¶ÏÊÇ²»ÊÇÒÑ¾­ÊÇºÃÓÑÁË
+	 * ï¿½Ð¶ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Çºï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 
 	public boolean isFriend(String userNo, String friendNo) throws Exception {
@@ -135,7 +135,7 @@ public class CommDao {
 	}
 
 	/**
-	 * »ñÈ¡ºÃÓÑÁÐ±í
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 	 */
 
 	public ResultSet queryFriendList(String userNo) throws Exception {
@@ -160,7 +160,7 @@ public class CommDao {
 	}
 
 	/**
-	 * »ñÈ¡ºÃÓÑÁÐ±í
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 	 */
 
 	public ResultSet queryFriendByName(String userName) throws Exception {
@@ -179,7 +179,7 @@ public class CommDao {
 	}
 
 	/**
-	 * »ñÈ¡ºÃÓÑÁÐ±í
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 	 */
 
 	public ResultSet queryFriendByMap(String mapNo) throws Exception {
@@ -198,33 +198,33 @@ public class CommDao {
 	}
 
 	/**
-	 * ·¢ÆðºÃÓÑÉêÇë
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 
 	public void addFriend(AddFriendReqMessage model) throws Exception {
 		String sql = "insert into   T_USER_ADDINFO(SEND_USER_NO,RCVER_NO,CONTENT_MSG,REQ_TIME,STATUS)"
 				+ " values(?,?,?,now(),?)";
 
-		DaoUtil.executeQuery(sql, new Object[] { model.MESSAGE.SEND_USER_NO,
+		DaoUtil.executeUpdate(sql, new Object[] { model.MESSAGE.SEND_USER_NO,
 				model.MESSAGE.RCVER_NO, model.MESSAGE.CONTENT_MSG, "01"
 
 		});
 	}
 
 	/**
-	 * ±£´æ´¦Àí½á¹û
+	 * ï¿½ï¿½ï¿½æ´¦ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void rcvFriend(String reqNo, String rlt, String reason)
 			throws Exception {
 		String sql = "update    T_USER_ADDINFO set RCV_DATE=now(),STATUS=?,CONFU_RESON=? where id=?";
 
-		DaoUtil.executeQuery(sql, new Object[] { rlt, reason, reqNo
+		DaoUtil.executeUpdate(sql, new Object[] { rlt, reason, reqNo
 
 		});
 	}
 
 	/**
-	 * ²éÑ¯ÇëÇó
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	 */
 
 	public ResultSet queryAddFriendReq(String reqNo) throws Exception {
@@ -250,43 +250,43 @@ public class CommDao {
 	}
 
 	/**
-	 * ½â³ý¹ØÏµ²¢¼ÇÂ¼
+	 * ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Â¼
 	 */
 	public void delFreind(String sendUserNo, String delUserNo, String delReason)
 			throws Exception {
 		String sql = "delete from T_USER_FRIEND  where  USER_NO=? and  FRIEND_USER_NO=? ";
-		DaoUtil.executeQuery(sql, new Object[] { sendUserNo, delUserNo });
+		DaoUtil.executeUpdate(sql, new Object[] { sendUserNo, delUserNo });
 
 		sql = "insert into  T_USER_UNADD(SEND_USER_NO,DEL_USER_NO,DEL_REASON,DEL_TIME)"
 				+ " values(?,?,?,now())";
-		DaoUtil.executeQuery(sql, new Object[] { sendUserNo, delUserNo,
+		DaoUtil.executeUpdate(sql, new Object[] { sendUserNo, delUserNo,
 				delReason });
 	}
 
 	/**
-	 * Ìí¼ÓºÃÓÑ
+	 * ï¿½ï¿½Óºï¿½ï¿½ï¿½
 	 */
 	public void addFreind(String sendUserNo, String rcvUserNo) throws Exception {
 		String sql = "delete from T_USER_FRIEND  where  USER_NO=? and  FRIEND_USER_NO=? ";
-		DaoUtil.executeQuery(sql, new Object[] { sendUserNo, rcvUserNo });
+		DaoUtil.executeUpdate(sql, new Object[] { sendUserNo, rcvUserNo });
 
 		sql = "insert into  T_USER_FRIEND(USER_NO,FRIEND_USER_NO,ADD_TIME)"
 				+ " values(?,?,now())";
-		DaoUtil.executeQuery(sql, new Object[] { sendUserNo, rcvUserNo });
+		DaoUtil.executeUpdate(sql, new Object[] { sendUserNo, rcvUserNo });
 	}
 
 	/**
-	 * Ìí¼ÓÏµÍ³ÏûÏ¢
+	 * ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½Ï¢
 	 */
 	public void addSysMsg(String userNo, String rcvNo, String msg)
 			throws Exception {
 		String sql = "insert into  T_MSG(USER_NO,RCV_NO,MSG,STATUS,SEND_TIME)"
 				+ " values(?,?,?,'01',now())";
-		DaoUtil.executeQuery(sql, new Object[] { userNo, rcvNo, msg });
+		DaoUtil.executeUpdate(sql, new Object[] { userNo, rcvNo, msg });
 	}
 
 	/**
-	 * ²éÑ¯ÓÃ»§
+	 * ï¿½ï¿½Ñ¯ï¿½Ã»ï¿½
 	 */
 
 	public boolean haveUser(String userNo) throws Exception {

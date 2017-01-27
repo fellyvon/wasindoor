@@ -2,7 +2,7 @@ package com.waspring.wasservice.net.dao;
 
 import java.sql.SQLException;
 
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 
 public class ModifyPassDao {
 
@@ -17,7 +17,7 @@ public class ModifyPassDao {
 
 		String sql = "update k_user   set user_pass=?  where user_no=?   ";
 
-		return DaoUtil.executeQuery(sql, new Object[] { pass, userNo });
+		return DaoUtil.executeUpdate(sql, new Object[] { pass, userNo });
 	}
 
 }

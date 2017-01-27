@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.aiyc.framework.utils.StringUtils;
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasservice.net.model.GetPrivRepMessage;
 import com.waspring.wasservice.net.model.GetSecRepMessage;
 import com.waspring.wasservice.net.model.GetUserRepMessage;
@@ -16,7 +16,7 @@ import com.waspring.wasservice.net.model.SetUserReqMessage;
 public class UserDao {
 
 	/**
-	 * »ñÈ¡Í·ÏñÎÄ¼þ
+	 * ï¿½ï¿½È¡Í·ï¿½ï¿½ï¿½Ä¼ï¿½
 	 */
 
 	public String getUserHead(String userNo) throws Exception {
@@ -31,7 +31,7 @@ public class UserDao {
 	}
 
 	/**
-	 * ÐÞ¸ÄÍ·Ïñ
+	 * ï¿½Þ¸ï¿½Í·ï¿½ï¿½
 	 * 
 	 * @param model
 	 * @return
@@ -40,16 +40,16 @@ public class UserDao {
 	public void modifyUserHead(String userNo, String head) throws Exception {
 		String sql = "select 1 from  k_user_ext where USER_NO=? ";
 		ResultSet rs = DaoUtil.queryData(sql, new Object[] { userNo });
-		if (rs.next()) {// //¸üÐÂ
+		if (rs.next()) {// //ï¿½ï¿½ï¿½ï¿½
 			sql = "insert into   arc_k_user_ext (user_no,user_img,up_date,arc_date)"
 					+ " select    user_no,user_img,up_date ,now() from  k_user_ext where user_no=? ";
-			DaoUtil.executeQuery(sql, new Object[] { userNo });
+			DaoUtil.executeUpdate(sql, new Object[] { userNo });
 
 			sql = " update k_user_ext set USER_IMG=?,UP_DATE=now() where user_no=?  ";
-			DaoUtil.executeQuery(sql, new Object[] { head, userNo });
-		} else {// /¼ÇÂ¼
+			DaoUtil.executeUpdate(sql, new Object[] { head, userNo });
+		} else {// /ï¿½ï¿½Â¼
 			sql = "insert into k_user_ext(user_no,user_img,up_date) values(?,?,now())";
-			DaoUtil.executeQuery(sql, new Object[] { userNo, head });
+			DaoUtil.executeUpdate(sql, new Object[] { userNo, head });
 		}
 	}
 
@@ -62,10 +62,10 @@ public class UserDao {
 		Iterator<SetSecReqMessage.scrList> it = list.iterator();
 		while (it.hasNext()) {
 			SetSecReqMessage.scrList li = it.next();
-			DaoUtil.executeQuery(sql, new Object[] { userId, li.SERCTY_TYPE,
+			DaoUtil.executeUpdate(sql, new Object[] { userId, li.SERCTY_TYPE,
 					li.SERCTY_VALUE });
 
-			DaoUtil.executeQuery("insert into p_user_tb(user_id,config_type,"
+			DaoUtil.executeUpdate("insert into p_user_tb(user_id,config_type,"
 					+ " config_value)values(?,?,?)", new Object[] { userId,
 					li.SERCTY_TYPE, li.SERCTY_VALUE
 
@@ -187,7 +187,7 @@ public class UserDao {
 
 		} else {
 			rm.RTN_FLAG = "0";
-			rm.RTN_MSG = "ÎÞÓÃ»§ÐÅÏ¢£¡";
+			rm.RTN_MSG = "ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½";
 		}
 		return rm;
 
@@ -255,6 +255,6 @@ public class UserDao {
 
 		list.add(model.MESSAGE.USER_NO);
 
-		return DaoUtil.executeQuery(sql, list.toArray());
+		return DaoUtil.executeUpdate(sql, list.toArray());
 	}
 }

@@ -1,7 +1,7 @@
 package com.waspring.wasservice.net.dao;
 
 import com.aiyc.framework.utils.StringUtils;
-import com.aiyc.server.standalone.db.DaoUtil;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasservice.net.model.RegReqMessage;
 
 public class RegDao {
@@ -19,7 +19,7 @@ public class RegDao {
 		else{
 			userName=	req.MESSAGE.USER_NAME;
 		}
-		return DaoUtil.executeQuery(sql, new Object[] {
+		return DaoUtil.executeUpdate(sql, new Object[] {
 
 		req.MESSAGE.USER_NO, userName, req.MESSAGE.USER_PWD, "",
 

@@ -10,10 +10,10 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.aiyc.server.standalone.db.DaoUtil;
 import com.aiyc.server.standalone.net.CalcTasker;
 import com.aiyc.server.standalone.util.Configuration;
 import com.aiyc.server.standalone.util.Log;
+import com.waspring.wasdbtools.DaoUtil;
 import com.waspring.wasindoor.locale.libsvm.SVMTrainer;
 
 /**
