@@ -6,8 +6,7 @@
 	<artifactId>wasservice</artifactId>
 	<version>v0.0.1</version>
 	<packaging>jar</packaging>
-	<description>wasindoor, a WiFi and geomagnetic signal based indoor positioning solutions, integrated SVM and KNN algorithm.
-The project is divided into 6 directories: 1, Doc here to store the project used in the design documents, interface documents, etc.. 2, output here to store the current backbone compiled executable jar package, easy to use. 3, wascore stored in the project's core class and tools, the highest level of abstraction. 4, wasindoor here to store indoor positioning algorithm algorithm, as well as providing a unified external positioning support interface. 5, wasserver here to store the solution interface framework to achieve, is the core of the project business. 6, wasservice here to store indoor solutions business interface code, the specific implementation of the business can refer to the doc interface description.</description>
+	<description>冰泉室内定位，一种基于wifi和地磁信号的室内定位解决方案，集成svm和knn等算法</description>
 
 	<name>waspring-indoor-wasservice</name>
 	<url>http://www.waspring.com</url>
