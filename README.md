@@ -1,6 +1,6 @@
 #wasindoor
 冰泉室内定位，一种基于wifi和地磁信号的室内定位解决方案，集成svm和knn等算法。
-
+github地址：https://github.com/fellyvon/wasindoor
 本项目分为6个目录:
 1、doc 这里存放项目用到的设计文档、接口文档等。
 2、output 这里存放当前主干编译出来的可执行jar包,方便直接使用。
